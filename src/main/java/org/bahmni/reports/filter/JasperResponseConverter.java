@@ -3,7 +3,7 @@ package org.bahmni.reports.filter;
 import net.sf.dynamicreports.jasper.builder.JasperConcatenatedReportBuilder;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.jasper.builder.export.Exporters;
-import net.sf.dynamicreports.jasper.builder.export.JasperXlsExporterBuilder;
+import net.sf.dynamicreports.jasper.builder.export.JasperXlsxExporterBuilder;
 import net.sf.dynamicreports.report.exception.DRException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -48,11 +48,11 @@ public class JasperResponseConverter {
                     logger.error(String.format("Invalid Macro Template specified: %s", macroTemplateFile));
                     throw new RuntimeException(EX_INVALID_MACRO_TEMPLATE);
                 }
-                JasperXlsExporterBuilder exporterBuilder = Exporters.xlsExporter(outputStream).setDetectCellType(true);
+                JasperXlsxExporterBuilder exporterBuilder = Exporters.xlsxExporter(outputStream).setDetectCellType(true);
                 exporterBuilder.setKeepWorkbookTemplateSheets(true);
                 exporterBuilder.setWorkbookTemplate(macroTemplateFile.toString());
                 exporterBuilder.addSheetName("Report");
-                concatenatedReportBuilder.toXls(exporterBuilder);
+                concatenatedReportBuilder.toXlsx(exporterBuilder);
                 // boolean delete = templateFile.delete();
                 // if (!delete) {
                 //    logger.warn(String.format("Uploaded report template file not deleted: %s", macroTemplateFile));
